@@ -3,13 +3,13 @@ import { useState } from 'react';
 import Nav from '../components/Nav';
 import styles from '../styles/Home.module.css';
 
-export default function AddPost() {
-  const [title, setTitle] = useState('');
-  const [content, setContent] = useState('');
+export default function AddProject() {
+  const [name, setName] = useState('');
+  const [slug, setSlug] = useState('');
   const [error, setError] = useState('');
   const [message, setMessage] = useState('');
 
-  const handlePost = async (e) => {
+  const handleProject = async (e) => {
     e.preventDefault();
 
     // reset error and message
@@ -17,19 +17,19 @@ export default function AddPost() {
     setMessage('');
 
     // fields check
-    if (!title || !content) return setError('All fields are required');
+    if (!name || !slug) return setError('All fields are required');
 
-    // post structure
-    let post = {
-      title,
-      content,
+    // project structure
+    let project = {
+      name,
+      slug,
       published: false,
       createdAt: new Date().toISOString(),
     };
-    // save the post
-    let response = await fetch('/api/posts', {
+    // save the project
+    let response = await fetch('/api/projects', {
       method: 'POST',
-      body: JSON.stringify(post),
+      body: JSON.stringify(project),
     });
 
     // get the data
@@ -37,8 +37,8 @@ export default function AddPost() {
 
     if (data.success) {
       // reset the fields
-      setTitle('');
-      setContent('');
+      setName('');
+      setSlug('');
       // set the message
       return setMessage(data.message);
     } else {
@@ -51,7 +51,7 @@ export default function AddPost() {
     <div>
       <Nav />
       <div className={styles.container}>
-        <form onSubmit={handlePost} className={styles.form}>
+        <form onSubmit={handleProject} className={styles.form}>
           {error ? (
             <div className={styles.formItem}>
               <h3 className={styles.error}>{error}</h3>
@@ -63,26 +63,26 @@ export default function AddPost() {
             </div>
           ) : null}
           <div className={styles.formItem}>
-            <label>Title</label>
+            <label>Project Name</label>
             <input
               type="text"
-              name="title"
-              onChange={(e) => setTitle(e.target.value)}
-              value={title}
-              placeholder="title"
+              name="name"
+              onChange={(e) => setName(e.target.value)}
+              value={name}
+              placeholder="Project Name"
             />
           </div>
           <div className={styles.formItem}>
-            <label>Content</label>
+            <label>Project Slug</label>
             <textarea
-              name="content"
-              onChange={(e) => setContent(e.target.value)}
-              value={content}
-              placeholder="Post content"
+              name="slug"
+              onChange={(e) => setSlug(e.target.value)}
+              value={slug}
+              placeholder="Project slug"
             />
           </div>
           <div className={styles.formItem}>
-            <button type="submit">Add post</button>
+            <button type="submit">Add Project</button>
           </div>
         </form>
       </div>

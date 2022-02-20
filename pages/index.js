@@ -1,10 +1,10 @@
 import Head from 'next/head';
 
 import Nav from '../components/Nav';
-import PostCard from '../components/PostCard';
 import styles from '../styles/Home.module.css';
+import ProjectCard from "../components/ProjectCard";
 
-export default function Home({ posts }) {
+export default function Home({ projects }) {
   return (
     <div>
       <Head>
@@ -15,12 +15,12 @@ export default function Home({ posts }) {
 
       <main>
         <div className={styles.container}>
-          {posts.length === 0 ? (
-            <h2>No added posts</h2>
+          {projects.length === 0 ? (
+            <h2>No added projects</h2>
           ) : (
             <ul>
-              {posts.map((post, i) => (
-                <PostCard post={post} key={i} />
+              {projects.map((project, i) => (
+                <ProjectCard project={project} key={i} />
               ))}
             </ul>
           )}
@@ -35,14 +35,14 @@ export async function getServerSideProps(ctx) {
   let dev = process.env.NODE_ENV !== 'production';
   let { DEV_URL, PROD_URL } = process.env;
 
-  // request posts from api
-  let response = await fetch(`${dev ? DEV_URL : PROD_URL}/api/posts`);
+  // request projects from api
+  let projectsResponse = await fetch(`${dev ? DEV_URL : PROD_URL}/api/projects`);
   // extract the data
-  let data = await response.json();
+  let projectsData = await projectsResponse.json();
 
   return {
     props: {
-      posts: data['message'],
+      projects: projectsData['message'],
     },
   };
 }

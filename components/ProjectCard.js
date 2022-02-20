@@ -1,21 +1,21 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 
-export default function PostCard({ post }) {
+export default function ProjectCard({ project }) {
   const [publishing, setPublishing] = useState(false);
   const [deleting, setDeleting] = useState(false);
   const router = useRouter();
 
-  // Publish post
-  const publishPost = async (postId) => {
+  // Publish project
+  const publishProject = async (projectId) => {
     // change publishing state
     setPublishing(true);
 
     try {
-      // Update post
-      await fetch('/api/posts', {
+      // Update project
+      await fetch('/api/projects', {
         method: 'PUT',
-        body: postId,
+        body: projectId,
       });
 
       // reset the publishing state
@@ -28,16 +28,16 @@ export default function PostCard({ post }) {
       return setPublishing(false);
     }
   };
-  // Delete post
-  const deletePost = async (postId) => {
+  // Delete project
+  const deleteProject = async (projectId) => {
     //change deleting state
     setDeleting(true);
 
     try {
-      // Delete post
-      await fetch('/api/posts', {
+      // Delete project
+      await fetch('/api/projects', {
         method: 'DELETE',
-        body: postId,
+        body: projectId,
       });
 
       // reset the deleting state
@@ -53,16 +53,16 @@ export default function PostCard({ post }) {
   return (
     <>
       <li>
-        <h3>{post.title}</h3>
-        <p>{post.content}</p>
-        <small>{new Date(post.createdAt).toLocaleDateString()}</small>
+        <h3>{project.name}</h3>
+        <p>{project.slug}</p>
+        <small>{new Date(project.createdAt).toLocaleDateString()}</small>
         <br />
-        {!post.published ? (
-          <button type="button" onClick={() => publishPost(post._id)}>
+        {!project.published ? (
+          <button type="button" onClick={() => publishProject(project._id)}>
             {publishing ? 'Publishing' : 'Publish'}
           </button>
         ) : null}
-        <button type="button" onClick={() => deletePost(post['_id'])}>
+        <button type="button" onClick={() => deleteProject(project['_id'])}>
           {deleting ? 'Deleting' : 'Delete'}
         </button>
       </li>

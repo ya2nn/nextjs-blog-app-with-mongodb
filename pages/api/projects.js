@@ -5,36 +5,36 @@ export default async function handler(req, res) {
   // switch the methods
   switch (req.method) {
     case 'GET': {
-      return getPosts(req, res);
+      return getProjects(req, res);
     }
 
     case 'POST': {
-      return addPost(req, res);
+      return addProject(req, res);
     }
 
     case 'PUT': {
-      return updatePost(req, res);
+      return updateProject(req, res);
     }
 
     case 'DELETE': {
-      return deletePost(req, res);
+      return deleteProject(req, res);
     }
   }
 }
 
-async function getPosts(req,res){
+async function getProjects(req,res){
   try {
     // connect to the database
     let { db } = await connectToDatabase();
-    // fetch the posts
-    let posts = await db
-      .collection('posts')
+    // fetch the Projects
+    let projects = await db
+      .collection('projects')
       .find({})
       .sort({ published: -1 })
       .toArray();
-    // return the posts
+    // return the Projects
     return res.json({
-      message: JSON.parse(JSON.stringify(posts)),
+      message: JSON.parse(JSON.stringify(projects)),
       success: true,
     });
   } catch (error) {
@@ -46,15 +46,15 @@ async function getPosts(req,res){
   }
 }
 
-async function addPost(req, res) {
+async function addProject(req, res) {
   try {
     // connect to the database
     let { db } = await connectToDatabase();
-    // add the post
-    await db.collection('posts').insertOne(JSON.parse(req.body));
+    // add the Project
+    await db.collection('projects').insertOne(JSON.parse(req.body));
     // return a message
     return res.json({
-      message: 'Post added successfully',
+      message: 'Project added successfully',
       success: true,
     });
   } catch (error) {
@@ -66,13 +66,13 @@ async function addPost(req, res) {
   }
 }
 
-async function updatePost(req, res) {
+async function updateProject(req, res) {
   try {
     // connect to the database
     let { db } = await connectToDatabase();
 
-    // update the published status of the post
-    await db.collection('posts').updateOne(
+    // update the published status of the Project
+    await db.collection('projects').updateOne(
       {
         _id: new ObjectId(req.body),
       },
@@ -81,7 +81,7 @@ async function updatePost(req, res) {
 
     // return a message
     return res.json({
-      message: 'Post updated successfully',
+      message: 'Project updated successfully',
       success: true,
     });
   } catch (error) {
@@ -94,19 +94,19 @@ async function updatePost(req, res) {
   }
 }
 
-async function deletePost(req, res) {
+async function deleteProject(req, res) {
   try {
     // Connecting to the database
     let { db } = await connectToDatabase();
 
-    // Deleting the post
-    await db.collection('posts').deleteOne({
+    // Deleting the Project
+    await db.collection('projects').deleteOne({
       _id: new ObjectId(req.body),
     });
 
     // returning a message
     return res.json({
-      message: 'Post deleted successfully',
+      message: 'Project deleted successfully',
       success: true,
     });
   } catch (error) {
