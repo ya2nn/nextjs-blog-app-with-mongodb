@@ -54,23 +54,23 @@ export default function SectionCard({ section }) {
   return (
     <div className='border-b flex items-center p-4'>
       <div className='flex-grow'>{section.name}</div>
-      {/*<div className='mx-[50px]'>*/}
-      {/*  <Link href={`/project/${section.slug}`}>*/}
-      {/*    <a className='mt-[50px]'>Edit</a>*/}
-      {/*  </Link>*/}
-      {/*</div>*/}
-      {/*<div className='mx-[50px]'>*/}
-      {/*  {!section.published ? (*/}
-      {/*    <button type="button" onClick={() => publishSection(section._id)}>*/}
-      {/*      {publishing ? 'Publishing' : 'Publish'}*/}
-      {/*    </button>*/}
-      {/*  ) : null}*/}
-      {/*</div>*/}
-      {/*<div className='mx-[50px]'>*/}
-      {/*  <button type="button" onClick={() => deleteSection(section['_id'])}>*/}
-      {/*    {deleting ? 'Deleting' : 'Delete'}*/}
-      {/*  </button>*/}
-      {/*</div>*/}
+      <div className='mx-[50px]'>
+        <Link href={`/project/${section.slug}`}>
+          <a className='mt-[50px]'>Edit</a>
+        </Link>
+      </div>
+      <div className='mx-[50px]'>
+        {!section.published ? (
+          <button type="button" onClick={() => publishSection(section._id)}>
+            {publishing ? 'Publishing' : 'Publish'}
+          </button>
+        ) : null}
+      </div>
+      <div className='mx-[50px]'>
+        <button type="button" onClick={() => deleteSection(section['_id'])}>
+          {deleting ? 'Deleting' : 'Delete'}
+        </button>
+      </div>
     </div>
   );
 }
