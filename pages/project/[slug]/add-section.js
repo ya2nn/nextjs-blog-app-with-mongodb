@@ -106,26 +106,7 @@ export default function AddSection({projectId, projectSlug}) {
   );
 }
 
-export async function getStaticPaths() {
-  let dev = process.env.NODE_ENV !== 'production';
-  let { DEV_URL, PROD_URL } = process.env;
-
-  // request projects from api
-  let projectsResponse = await fetch(`${dev ? DEV_URL : PROD_URL}/api/projects`);
-  // extract the data
-  let projectsData = await projectsResponse.json();
-
-  return {
-    paths: projectsData['message'].map(({slug}) => ({
-      params: {
-        slug,
-      },
-    })),
-    fallback: false,
-  };
-}
-
-export async function getStaticProps({ params }) {
+export async function getServerSideProps({ params }) {
   let dev = process.env.NODE_ENV !== 'production';
   let { DEV_URL, PROD_URL } = process.env;
 
