@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
+import Link from "next/link";
 
 export default function ProjectCard({ project }) {
   const [publishing, setPublishing] = useState(false);
@@ -51,21 +52,39 @@ export default function ProjectCard({ project }) {
     }
   };
   return (
-    <>
-      <li>
-        <h3>{project.name}</h3>
-        <p>{project.slug}</p>
-        <small>{new Date(project.createdAt).toLocaleDateString()}</small>
-        <br />
+    <div className='border-b flex items-center p-4'>
+      <div className='flex-grow'>{project.name}</div>
+      <div className='mx-[50px]'>
+        <Link href={`/project/${project.slug}`}>
+          <a className='mt-[50px]'>Edit</a>
+        </Link>
+      </div>
+      <div className='mx-[50px]'>
         {!project.published ? (
           <button type="button" onClick={() => publishProject(project._id)}>
             {publishing ? 'Publishing' : 'Publish'}
           </button>
         ) : null}
+      </div>
+      <div className='mx-[50px]'>
         <button type="button" onClick={() => deleteProject(project['_id'])}>
           {deleting ? 'Deleting' : 'Delete'}
         </button>
-      </li>
-    </>
+      </div>
+    </div>
+      // <li>
+      //   <h3>{project.name}</h3>
+      //   <p>{project.slug}</p>
+      //   <small>{new Date(project.createdAt).toLocaleDateString()}</small>
+      //   <br />
+      //   {!project.published ? (
+      //     <button type="button" onClick={() => publishProject(project._id)}>
+      //       {publishing ? 'Publishing' : 'Publish'}
+      //     </button>
+      //   ) : null}
+      //   <button type="button" onClick={() => deleteProject(project['_id'])}>
+      //     {deleting ? 'Deleting' : 'Delete'}
+      //   </button>
+      // </li>
   );
 }

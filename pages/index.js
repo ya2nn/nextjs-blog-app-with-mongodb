@@ -1,7 +1,8 @@
 import Head from 'next/head';
+import Link from "next/link";
 
+import Container from "../components/Container";
 import Nav from '../components/Nav';
-import styles from '../styles/Home.module.css';
 import ProjectCard from "../components/ProjectCard";
 
 export default function Home({ projects }) {
@@ -14,17 +15,23 @@ export default function Home({ projects }) {
       <Nav />
 
       <main>
-        <div className={styles.container}>
-          {projects.length === 0 ? (
-            <h2>No added projects</h2>
-          ) : (
-            <ul>
-              {projects.map((project, i) => (
+        <Container>
+          <h1 className='text-3xl mb-[20px]'>Project List</h1>
+
+          <div>
+            {projects.length === 0 ? (
+              <h2>No added projects</h2>
+            ) : (
+              projects.map((project, i) => (
                 <ProjectCard project={project} key={i} />
-              ))}
-            </ul>
-          )}
-        </div>
+              ))
+            )}
+
+            <Link href="/project/add-project">
+              <button className='mt-[50px]'>Add new project</button>
+            </Link>
+          </div>
+        </Container>
       </main>
     </div>
   );

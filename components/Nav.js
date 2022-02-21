@@ -1,22 +1,13 @@
 import Link from 'next/link';
 
-import styles from '../styles/Nav.module.css';
-
 export default function Nav() {
   return (
-    <nav className={styles.nav}>
-      <ul className={styles.list}>
-        <li className={styles.item}>
-          <Link href="/">
-            <a>Home</a>
-          </Link>
-        </li>
-        <li>
-          <Link href="/add-project">
-            <a>Add project</a>
-          </Link>
-        </li>
-      </ul>
-    </nav>
+    <header className='sticky top-0 left-0 z-50 p-4 shadow-md w-full flex items-center bg-white mb-[20px]'>
+      <div className='mx-[20px]'>Burger</div>
+      <Link href="/">
+        <div className='mx-[20px] text-2xl cursor-pointer hover:underline'>Projects</div>
+      </Link>
+      <div className='mx-[20px]'>Order Filter</div>
+    </header>
   );
 }

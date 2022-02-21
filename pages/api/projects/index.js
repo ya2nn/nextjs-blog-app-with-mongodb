@@ -1,4 +1,4 @@
-const { connectToDatabase } = require('../../lib/mongodb');
+const { connectToDatabase } = require('../../../lib/mongodb');
 const ObjectId = require('mongodb').ObjectId;
 
 export default async function handler(req, res) {
@@ -54,7 +54,7 @@ async function addProject(req, res) {
     await db.collection('projects').insertOne(JSON.parse(req.body));
     // return a message
     return res.json({
-      message: 'Project added successfully',
+      message: 'Project added successfully, please wait to redirect',
       success: true,
     });
   } catch (error) {
