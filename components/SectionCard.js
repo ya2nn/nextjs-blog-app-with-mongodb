@@ -8,9 +8,11 @@ export default function SectionCard({ project, section, icons }) {
   //Icon
   const [name, setName] = useState('');
   const [slug, setSlug] = useState('');
-  const [svg, setSvg] = useState('');
+  // const [svg, setSvg] = useState('');
   const [error, setError] = useState('');
   const [message, setMessage] = useState('');
+  const [image, setImage] = useState(null);
+  const [createObjectURL, setCreateObjectURL] = useState(null);
 
   //Section
   const [publishing, setPublishing] = useState(false);
@@ -25,13 +27,13 @@ export default function SectionCard({ project, section, icons }) {
     setMessage('');
 
     // fields check
-    if (!name || !slug || !svg) return setError('All fields are required');
+    if (!name || !slug) return setError('All fields are required');
 
     // section structure
     let icons = {
       name,
       slug,
-      svg,
+      svg: image.name,
       sectionId: section._id,
       projectId: project.id,
       published: false,
@@ -50,7 +52,9 @@ export default function SectionCard({ project, section, icons }) {
       // reset the fields
       setName('');
       setSlug('');
-      setSvg('');
+      // setSvg('');
+
+      await uploadToServer(e)
 
       // set the message
       setMessage(data.message);
@@ -117,6 +121,25 @@ export default function SectionCard({ project, section, icons }) {
     }
   };
 
+  const uploadToServer = async (event) => {
+    const body = new FormData();
+    body.append("file", image);
+
+    const response = await fetch("/api/upload", {
+      method: "POST",
+      body
+    });
+  };
+
+  const uploadToClient = (event) => {
+    if (event.target.files && event.target.files[0]) {
+      const i = event.target.files[0];
+
+      setImage(i);
+      setCreateObjectURL(URL.createObjectURL(i));
+    }
+  };
+
   const iconsFiltered = icons.filter(({sectionId}) => sectionId === section._id)
 
   return (
@@ -143,9 +166,10 @@ export default function SectionCard({ project, section, icons }) {
       </div>
 
       <div className='p-4 flex flex-wrap'>
-        {iconsFiltered.map(({_id, name})=> (
-          <div key={_id} className='border p-2 m-2'>
-            {name}
+        {iconsFiltered.map(({_id, name, svg})=> (
+          <div key={_id} className='border p-2 m-2 justify-center items-center'>
+            <img src={`/uploads/${svg}`} alt={name} className='mx-auto'/>
+            <p className='text-center'>{name}</p>
           </div>
         ))}
       </div>
@@ -171,16 +195,21 @@ export default function SectionCard({ project, section, icons }) {
                 className='border shadow-md px-4 py-2'
               />
             </div>
-            <div className='flex items-center'>
-              <label className='w-[200px]'>Icon Path</label>
-              <input
-                type="text"
-                name="path"
-                onChange={(e) => setSvg(e.target.value)}
-                value={svg}
-                placeholder="Icon Path"
-                className='border shadow-md px-4 py-2'
-              />
+            {/*<div className='flex items-center'>*/}
+            {/*  <label className='w-[200px]'>Icon Path</label>*/}
+            {/*  <input*/}
+            {/*    type="text"*/}
+            {/*    name="path"*/}
+            {/*    onChange={(e) => setSvg(e.target.value)}*/}
+            {/*    value={svg}*/}
+            {/*    placeholder="Icon Path"*/}
+            {/*    className='border shadow-md px-4 py-2'*/}
+            {/*  />*/}
+            {/*</div>*/}
+            <div>
+              <label className='w-[200px]'>Select Icon</label>
+              <img src={createObjectURL} />
+              <input type="file" name="myImage" onChange={uploadToClient} />
             </div>
             <div>
               {message ? (

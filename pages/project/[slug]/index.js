@@ -79,6 +79,8 @@ const Project = ({ project, sections, icons }) => {
       <main>
         <Container>
           <h1 className='text-3xl mb-[30px]'>{project.name}</h1>
+          <div className='mb-[30px]'>
+            <span>JSON - </span><span className='font-bold'>/api/icons/{project.id}</span> </div>
 
           <div>
             {sections.length === 0 ? (

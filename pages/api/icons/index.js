@@ -30,7 +30,7 @@ async function getIcons(req,res){
     let icons = await db
       .collection('icons')
       .find({})
-      .sort({ published: -1 })
+      .sort({})
       .toArray();
     // return the Icons
     return res.json({
