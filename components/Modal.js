@@ -34,19 +34,20 @@ const Modal = ({
     if (code === 27) {
       closeModal(modalId)
     }
-  }, [])
+  }, [modalId])
 
   const handleOutsideClick = useCallback((e) => {
     !modalContainerRef.current?.contains(e.target) && closeModal(modalId)
-  }, [])
+  }, [modalId])
 
   useEffect(() => {
+    const {current} = modalRef
     document.addEventListener('keyup', handleEsc)
 
-    modalRef.current?.addEventListener('click', handleOutsideClick)
+    current.addEventListener('click', handleOutsideClick)
     return () => {
       document.removeEventListener('keyup', handleEsc)
-      modalRef.current?.removeEventListener('click', handleOutsideClick)
+      current.removeEventListener('click', handleOutsideClick)
     }
   }, [handleEsc, handleOutsideClick])
 
