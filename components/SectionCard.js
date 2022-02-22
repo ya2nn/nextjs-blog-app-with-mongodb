@@ -121,7 +121,7 @@ export default function SectionCard({ project, section, icons }) {
   return (
     <>
       <div className='border-b flex items-center p-4'>
-        <div className='flex-grow'>{section.name} --- ${section._id}</div>
+        <div className='flex-grow'>{section.name}</div>
         <div className='mx-[50px]'>
           <Link href={`/project/${section.slug}`}>
             <a className='mt-[50px]'>Edit</a>
@@ -151,7 +151,7 @@ export default function SectionCard({ project, section, icons }) {
       <div className='p-6 flex'>
         <button onClick={() => openModal(`addNewIcon-${section._id}`)}>Add new Icon</button>
         <Modal modalId={`addNewIcon-${section._id}`}>
-          <h2 className='text-3xl mb-[20px]'>Add new Icon --- {section._id}</h2>
+          <h2 className='text-3xl mb-[20px]'>Add new Icon</h2>
 
           <form onSubmit={handleIcon} className='space-y-4'>
             {error ? (
