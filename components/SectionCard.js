@@ -8,7 +8,6 @@ export default function SectionCard({ project, section, icons }) {
   //Icon
   const [name, setName] = useState('');
   const [slug, setSlug] = useState('');
-  // const [svg, setSvg] = useState('');
   const [error, setError] = useState('');
   const [message, setMessage] = useState('');
   const [image, setImage] = useState(null);
@@ -195,17 +194,17 @@ export default function SectionCard({ project, section, icons }) {
                 className='border shadow-md px-4 py-2'
               />
             </div>
-            {/*<div className='flex items-center'>*/}
-            {/*  <label className='w-[200px]'>Icon Path</label>*/}
-            {/*  <input*/}
-            {/*    type="text"*/}
-            {/*    name="path"*/}
-            {/*    onChange={(e) => setSvg(e.target.value)}*/}
-            {/*    value={svg}*/}
-            {/*    placeholder="Icon Path"*/}
-            {/*    className='border shadow-md px-4 py-2'*/}
-            {/*  />*/}
-            {/*</div>*/}
+            <div className='flex items-center'>
+              <label className='w-[200px]'>Icon Slug</label>
+              <input
+                type="text"
+                name="slug"
+                onChange={(e) => setSlug(e.target.value)}
+                value={slug}
+                placeholder="Icon Slug"
+                className='border shadow-md px-4 py-2'
+              />
+            </div>
             <div>
               <label className='w-[200px]'>Select Icon</label>
               <img src={createObjectURL} />
