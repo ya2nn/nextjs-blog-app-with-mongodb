@@ -72,19 +72,5 @@ export default function ProjectCard({ project }) {
         </button>
       </div>
     </div>
-      // <li>
-      //   <h3>{project.name}</h3>
-      //   <p>{project.slug}</p>
-      //   <small>{new Date(project.createdAt).toLocaleDateString()}</small>
-      //   <br />
-      //   {!project.published ? (
-      //     <button type="button" onClick={() => publishProject(project._id)}>
-      //       {publishing ? 'Publishing' : 'Publish'}
-      //     </button>
-      //   ) : null}
-      //   <button type="button" onClick={() => deleteProject(project['_id'])}>
-      //     {deleting ? 'Deleting' : 'Delete'}
-      //   </button>
-      // </li>
   );
 }

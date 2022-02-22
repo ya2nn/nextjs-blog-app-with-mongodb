@@ -51,6 +51,7 @@ export default function Home({ projects }) {
       setMessage(data.message);
       // redirect to project
       await router.push(`/project/${slug}`)
+      setMessage('');
     } else {
       // set the error
       return setError(data.message);

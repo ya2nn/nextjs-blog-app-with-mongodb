@@ -58,6 +58,7 @@ export default function SectionCard({ project, section, icons }) {
       await router.push(`/project/${project.slug}`)
       //Close Modal
       closeModal(`addNewIcon-${section._id}`)
+      setMessage('');
     } else {
       // set the error
       return setError(data.message);

@@ -54,6 +54,7 @@ const Project = ({ project, sections, icons }) => {
       await router.push(`/project/${project.slug}`)
       //Close Modal
       closeModal('addNewSection')
+      setMessage('');
     } else {
       // set the error
       return setError(data.message);
