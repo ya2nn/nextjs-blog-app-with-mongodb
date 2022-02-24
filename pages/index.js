@@ -74,53 +74,9 @@ export default function Home({ projects }) {
       <Nav />
 
       <main>
-        <Container>
-          <h1 className='text-3xl mb-[20px]'>Project List</h1>
-
-          <div>
-            {projects.length === 0 ? (
-              <h2>No added projects</h2>
-            ) : (
-              projects.map((project, i) => (
-                <ProjectCard project={project} key={i} />
-              ))
-            )}
-
-            {/*<Link href="/project/add-project">*/}
-            {/*  <button >Add new project</button>*/}
-            {/*</Link>*/}
-            <button className='mt-[50px]' onClick={() => openModal('addNewProject')}>Add new project</button>
-            <Modal modalId='addNewProject'>
-              <h2 className='text-3xl mb-[20px]'>Create new project</h2>
-
-              <form onSubmit={handleProject} className='space-y-4'>
-                {error ? (
-                  <div>
-                    <h3 className='text-red-500 text-bold'>{error}</h3>
-                  </div>
-                ) : null}
-                <div className='flex items-center'>
-                  <label className='w-[200px]'>Project Name</label>
-                  <input
-                    type="text"
-                    name="name"
-                    onChange={(e) => handleChange(e.target.value)}
-                    value={name}
-                    placeholder="Project Name"
-                    className='border shadow-md px-4 py-2'
-                  />
-                </div>
-                <div>
-                  {message ? (
-                    <h3 className='text-green-500 text-bold'>{message}</h3>
-                  ) : (
-                    <button type="submit" className='py-2 px-4 bg-black text-white'>Add Project</button>
-                  )}
-                </div>
-              </form>
-            </Modal>
-          </div>
-        </Container>
+        <div>
+          Hellooooooooo
+        </div>
       </main>
     </div>
   );
