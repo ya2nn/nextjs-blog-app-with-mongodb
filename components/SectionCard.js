@@ -195,7 +195,7 @@ export default function SectionCard({ project, section, icons }) {
               />
             </div>
             <div className='flex items-center'>
-              <label className='w-[200px]'>Icon Slug</label>
+              <label className='w-[200px]'>Icon Slug 2</label>
               <input
                 type="text"
                 name="slug"
